@@ -77,5 +77,21 @@ td{
 }
 #smallheadings{
 	text-align:left;
-	
+
+}
+
+.drop-zone {
+    border: 1px dotted #9C9898;
+    height:500px;
+    width:800px;
+    margin: 2px
+    overflow:auto;
+}
+
+.graph-zone {
+    border: 1px dotted #9C9898;
+    height:500px;
+    width:500px;
+    margin: 2px
+    overflow:auto;
 }
