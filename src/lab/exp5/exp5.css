@@ -1,0 +1,74 @@
+#heading{
+	background-color: rgb(0, 190, 255);
+	color: rgb(255, 255, 255);
+	text-align: center;
+	border-style: solid;
+    border-color: blue;
+    border-width: 3 px;
+    padding=0 px;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4CAF50; /* Green */
+  text-align: center;
+}
+#simulate_button {
+	text-align: center;
+
+} 
+
+#one{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin:10px;
+
+}
+
+th{
+	vertical-align: top;
+	min-width:80px;
+	padding: 5px;
+	border: 1px solid black;
+	height:500px;
+}
+
+#toolhead{
+	background-color: rgb(0, 190, 255);
+	color: rgb(255, 255, 255);
+	text-align: center;
+	border-style: solid;
+    border-color: blue;
+    border-width: 3 px;
+}
+td{
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.componentButton{
+	font-size: 10pt;
+	background: #F4E57F;
+	color: #565527;
+	border-radius: 5px 5px 5px 5px;
+	margin: 3px;
+	border: solid;
+	cursor: crosshair;
+	border-width: 2px;
+}
+
+.componentButton:hover{
+	background: #ffff55;
+}
+
+.button{
+	background-color: #ffaa00;
+	padding:5px;
+	margin:3px;
+	border-radius:5px;
+}
