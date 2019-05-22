@@ -71,4 +71,11 @@ td{
 	padding:5px;
 	margin:3px;
 	border-radius:5px;
+	cursor: pointer;
+	align-content: left;
+
+}
+#smallheadings{
+	text-align:left;
+	
 }

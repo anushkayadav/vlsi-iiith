@@ -17,9 +17,9 @@
 
 	<table id="one">
 		<tr>
-			<th id="toolbar">
+			<th align="left">
 				<h3 id="toolhead">Tool Bar</h3><br>
-				Available icons<br>
+				<div id="smallheadings">Available icons </div><br><br>
 
 				<table>
 					<tr>
@@ -28,28 +28,26 @@
 					</tr>
 					<tr>
 						<td><img class="componentButton" id="resistor" src="resistor.png" style="width:40px;height:40px;"></td>
-						 <td><img class="componentButton" id="inductor"  src="inductor.png"style="width:40px;height:40px;"></td>
+						 <td><img class="componentButton" id="wire"  src="wire.gif"style="width:40px;height:40px;"></td>
 					 </tr>
 					<tr>
 					 	<td><img class="componentButton" id="capacitor" src="capacitor.png"  style="width:40px;height:40px;"></td>
-					  	<td><class="componentButton" id="diode" src="diode.png" style="width:40px;height:40px;"></td>
+					  	<td><img class="componentButton" id="diode" src="diode.png" style="width:40px;height:40px;"></td>
 					  </tr>
 					<tr>
 					 	<td><img class="componentButton" id="npn" src="npn.png" style="width:40px;height:40px;"></td>
-					  	<td><img src="comp8.gif" style="width:40px;height:40px;"></td>
+					  	<td><img class="componentButton" id="inverter" src="inverter.png" style="width:40px;height:40px;"></td> 
 					</tr>
 					<tr>
-					 	<td><img src="comp9.gif" style="width:40px;height:40px;"></td>
-					  	<td><img src="comp10.gif" style="width:40px;height:40px;"></td>
+					 	<td><img class="componentButton" id="input" src="input.gif" style="width:40px;height:40px;"></td>
+					  	<td><img class="componentButton" id="output" src="output.gif" style="width:40px;height:40px;"></td>
 					</tr>
-					<tr> 
-						<td><img src="comp11.gif" style="width:40px;height:40px;"></td>
-					 	<td><img src="comp12.gif" style="width:40px;height:40px;"></td> 
-					 </tr>
+					
+				</table>
+				<br>
 
-					</table>
+				<span id='clear' class="button">Clear Components</span>
 
-					<span id='clear' class="button">Clear Components</span>
 
 
 			</th>
@@ -57,47 +55,10 @@
 			<th>
 				<h3 id="toolhead">Circuit Design</h3><br>
 				
-				<canvas style='position:relative;' id="schematic"></canvas>
-				<canvas style='position:absolute' id="graph"></canvas>
-				<script>
+				
 
 
-				function resizeWindow(){
-	$("#schematic")[0].width=window.innerWidth-800;
-	$("#schematic")[0].height=window.innerHeight;
-	$("#graph")[0].width=300;
-	$("#graph")[0].height=300;
-	var heightOffset=$("#components").innerHeight();
-	$("#schematic").css({top:heightOffset,width:window.innerWidth-800,height:window.innerHeight-200});
-	$("#graph").css({top:heightOffset,width:590,height:500,left:window.innerWidth-600});
-	var kaka=100;
-	$("#rep").css({top:heightOffset+600,left:window.innerWidth-605});
-	//$("#rep").css({top:400});
-	//console.log("height "+window.innerWidth+ " height off "+heightOffset);	
-	//schematic.schematicCanvas.height=window.innerHeight; //-$("#topBar").height()
-	//schematic.schematicCanvas.width=window.innerWidth-300;
-	var graph=$("graph")[0];
-	//cvs.height=300;
-	//cvs.width=300;
-	//schematic.schematicCanvas.width=window.innerWidth-300;
-	schematic.draw();
-				}			
-
-				$(document).ready(function(){
-	schematic = new SchematicCapture();
-	resizeWindow();
-	$(".componentButton").click(function(e){
-		var pos=$(e.currentTarget).position()
-		//console.log(pos)
-		schematic.addComponent(e.currentTarget.id,pos.left,pos.top)
-	});
-	$("#clear").click(function(e){
-		schematic.clear();
-	});
-	window.addEventListener('resize', resizeWindow, false);
-	//schematic.draw();
-				});
-				</script>
+				
 
 				
 			</th>
