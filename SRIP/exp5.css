@@ -60,6 +60,7 @@ td{
 	border: solid;
 	cursor: crosshair;
 	border-width: 2px;
+	z-index: 2;
 }
 
 .componentButton:hover{
@@ -80,7 +81,7 @@ td{
 
 }
 
-.drop-zone {
+.canvas {
     border: 1px dotted #9C9898;
     height:500px;
     width:800px;
