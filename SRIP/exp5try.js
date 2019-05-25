@@ -117,6 +117,48 @@ function init() {
 			$(".canvas").empty();
 			diagram=[];
 		});
+
+        //$( ".vSource" ).click(function() {
+            //$( ".vSource" ).draggable({ disabled: true });
+           // alert("Voltage source is not used in this experiment...Try Again");
+       // });
+
+       /*document.addEventListener("drop", function(event) {
+        event.preventDefault()
+        if(event.target.hasClass==='vSource'){
+            $( ".vSource" ).draggable({ disabled: true });
+            alert("Voltage source is not used in this experiment...Try Again");
+            
+        }
+    })*/
+
+    $( ".vSource" ).on( "drag", function( event, ui ) {
+        alert("Voltage source is not used in this experiment...Try Again");
+        //$( ".vSource" ).draggable({ disabled: true });
+    } );
+
+    $( ".resistor" ).on( "drag", function( event, ui ) {
+        alert("Resistor is not used in this experiment...Try Again");
+        //$( ".vSource" ).draggable({ disabled: true });
+    } );
+
+    $( ".npn" ).on( "drag", function( event, ui ) {
+        alert("npn is not used in this experiment...Try Again");
+        //$( ".vSource" ).draggable({ disabled: true });
+    } );
+
+    $( ".diode" ).on( "drag", function( event, ui ) {
+        alert("diode is not used in this experiment...Try Again");
+        //$( ".vSource" ).draggable({ disabled: true });
+    } );
+
+
+
+
+
+
+
+
 	}
 
 
