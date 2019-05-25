@@ -13,9 +13,11 @@ function init() {
                         _id: (new Date).getTime(),
                         position: ui.helper.position()
                     };
+                    
 
                     if(ui.helper.hasClass("ground")){
                         node.type = "ground";
+                        
 
                     } else if(ui.helper.hasClass("vSource")){
                         node.type = "voltage-source";
@@ -113,9 +115,21 @@ function init() {
 		}
 		
 
+        var gcount=0;//count no. of times ground dropped
+        var ccount=0;//count no. of time capacitor dropped
+        var icount=0;//count no. of inputs dropped
+        var ocount=0;//count no. of outputs dropped
+
+
+
 		$( ".button" ).click(function() {
 			$(".canvas").empty();
-			diagram=[];
+			diagram=[];//clear the digram array
+             gcount=0;//set all counts to 0 again
+             ccount=0;
+             icount=0;
+             ocount=0;
+
 		});
 
         //$( ".vSource" ).click(function() {
@@ -150,6 +164,44 @@ function init() {
     $( ".diode" ).on( "drag", function( event, ui ) {
         alert("diode is not used in this experiment...Try Again");
         //$( ".vSource" ).draggable({ disabled: true });
+    } );
+
+
+    
+
+    $( ".canvas" ).on( "drop", function( event, ui ) {
+        
+        if(ui.helper.hasClass("ground")){
+            alert("ground dropped");
+            gcount=gcount+1;
+            if(gcount>1){
+                alert("Can have maximum one ground !");
+            }
+        }
+
+        if(ui.helper.hasClass("capacitor")){
+            alert("capacitor dropped");
+            ccount=ccount+1;
+            if(ccount>1){
+                alert("Can have maximum one capacitor!");
+            }
+        }
+
+        if(ui.helper.hasClass("input")){
+            alert("input dropped");
+            icount=icount+1;
+            if(icount>1){
+                alert("Can have maximum one input !");
+            }
+        }
+
+        if(ui.helper.hasClass("output")){
+            alert("output dropped");
+            ocount=ocount+1;
+            if(ocount>1){
+                alert("Can have maximum one output !");
+            }
+        }
     } );
 
 
