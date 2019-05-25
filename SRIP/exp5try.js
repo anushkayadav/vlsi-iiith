@@ -16,25 +16,34 @@ function init() {
 
                     if(ui.helper.hasClass("ground")){
                         node.type = "ground";
+
                     } else if(ui.helper.hasClass("vSource")){
                         node.type = "voltage-source";
+
                     } else if(ui.helper.hasClass("resistor")){
                         node.type = "resistor";
+
                     } else if(ui.helper.hasClass("wire")){
                         node.type = "wire";
+
                     } else if(ui.helper.hasClass("capacitor")){
                         node.type = "capacitor";
+
                     } else if(ui.helper.hasClass("inverter")){
                         node.type = "inverter";
 
                     } else if(ui.helper.hasClass("diode")){
                         node.type = "diode";
+
                     } else if(ui.helper.hasClass("npn")){
                         node.type = "npn";
+
                     } else if(ui.helper.hasClass("input")){
                         node.type = "input";
+
                     } else if(ui.helper.hasClass("output")){
                         node.type = "output";
+
                     } else {
                         return;
                     }
@@ -46,6 +55,7 @@ function init() {
             });
 	function renderDiagram(diagram) {
 		//console.log(diagram);
+		canvas.empty();
 		for(var d in diagram){
 			var node = diagram[d];
 			console.log(node);
@@ -101,6 +111,12 @@ function init() {
         
 
 		}
+		
+
+		$( ".button" ).click(function() {
+			$(".canvas").empty();
+			diagram=[];
+		});
 	}
 
 
