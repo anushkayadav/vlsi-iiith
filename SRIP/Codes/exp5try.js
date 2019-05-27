@@ -2,18 +2,24 @@ $(init);
 function init() {
 
 
-
+  function input(){
     var input_div='<div class="input"></div>';
-    var input1=$(input_div).css({
+    var input=$(input_div).css({
               "position":"absolute",
               "width":"8px",
               "height":"8px",
               "left":"-2px",
-              "top":"22%",
+              "top":"38%",
               "background-color":"#47cf73",
               "border-radius":"50%",
               "z-index":"5",
             });
+
+    return input;
+  }
+    
+
+  function output(){
 
     var output_div='<div class="output"></div>';
     var output=$(output_div).css({
@@ -21,11 +27,16 @@ function init() {
               "width":"8px",
               "height":"8px",
               "right":"-2px",
-              "top":"45%",
+              "top":"38%",
               "background-color":"#47cf73",
               "border-radius":"50%",
               "z-index":"5",
             });
+
+    return output;
+  }
+
+    
 
 
 
@@ -93,10 +104,10 @@ function init() {
 			console.log(node);
 			var html = "";
             if(node.type === "ground") {
-            	html = '<img src="images/ground.png" style="width:30px ;height:60px;">';
+            	html = '<div><img src="images/ground.png" style="width:30px ;height:60px;"></div>';
             
             } else if(node.type === "voltage-source") {
-            html = "<img src='images/voltage.png' style='width:50px;height:50px;'>";
+            html = "<div><img src='images/voltage.png' style='width:50px;height:50px;'></div>";
             
             } else if(node.type === "resistor") {
            html = "<img src='images/resistor.png' style='width:50px;height:50px;'>";
@@ -105,10 +116,10 @@ function init() {
             html = "<img src='images/wire.gif' style='width:50px;height:50px;'>";
             
             } else if(node.type === "capacitor") {
-            html = "<img src='images/capacitor.png' style='width:90px;height:45px;'>";
+            html = "<div ><img src='images/capacitor.png' style='width:90px;height:45px;'></div>";
         	
         	} else if(node.type === "inverter") {
-            html = "<img src='images/inverter.png' style='width:100px;height:40px;'>";
+            html = "<div><img src='images/inverter.png' style='width:100px;height:40px;'></div>";
             
             } else if(node.type === "diode") {
             html = "<img src='images/diode.png' style='width:50px;height:50px;'>";
@@ -117,11 +128,14 @@ function init() {
            html = "<img src='images/npn.png' style='width:50px;height:50px;'>";
             
             } else if(node.type === "input") {
-            html = "<img src='images/input.gif' style='width:50px;height:50px;'>";
+            html = "<div><img src='images/input.gif' style='width:50px;height:50px;'></div>";
         	
         	} else if(node.type === "output") {
-            html = "<img src='images/output.gif' style='width:50px;height:50px;'>";
+            html = "<div><img src='images/output.gif' style='width:50px;height:50px;'></div>";
         }
+
+       
+
         var dom = $(html).css({
                         "position": "absolute",
                         "top": node.position.top,
@@ -131,14 +145,16 @@ function init() {
                             console.log(ui);
                             var id = ui.helper.attr("id");
                             for(var i in diagram) {
+
                                 if(diagram[i]._id == id) {
                                     diagram[i].position.top = ui.position.top;
                                     diagram[i].position.left = ui.position.left;
+
                                 }
                             }
                         }
                     }).attr("id", node._id);
-                    dom.append(input1).append(output);
+                    dom.append(input()).append(output());
                     canvas.append(dom);
                 }
         
