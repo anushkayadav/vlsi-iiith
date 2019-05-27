@@ -1,6 +1,36 @@
 $(init);
 function init() {
 
+
+
+    var input_div='<div class="input"></div>';
+    var input1=$(input_div).css({
+              "position":"absolute",
+              "width":"8px",
+              "height":"8px",
+              "left":"-2px",
+              "top":"22%",
+              "background-color":"#47cf73",
+              "border-radius":"50%",
+              "z-index":"5",
+            });
+
+    var output_div='<div class="output"></div>';
+    var output=$(output_div).css({
+              "position":"absolute",
+              "width":"8px",
+              "height":"8px",
+              "right":"-2px",
+              "top":"45%",
+              "background-color":"#47cf73",
+              "border-radius":"50%",
+              "z-index":"5",
+            });
+
+
+
+    
+
 	var diagram = [];
 	var canvas = $(".canvas");
 	$(".componentButton").draggable({
@@ -108,6 +138,7 @@ function init() {
                             }
                         }
                     }).attr("id", node._id);
+                    dom.append(input1).append(output);
                     canvas.append(dom);
                 }
         
@@ -216,3 +247,28 @@ function init() {
 
 
 
+
+
+/* var input_div='<div class="input"></div>';
+            var input1=$(input_div).css({
+              "position":"absolute",
+              "width":"8px",
+              "height":"8px",
+              "left":"-2px",
+              "top":"22%",
+              "background-color":"#47cf73",
+              "border-radius":"50%",
+              "z-index":"5",
+            });
+
+             var output_div='<div class="output"></div>';
+            var output=$(output_div).css({
+              "position":"absolute",
+              "width":"8px",
+              "height":"8px",
+              "right":"-2px",
+              "top":"45%",
+              "background-color":"#47cf73",
+              "border-radius":"50%",
+              "z-index":"5",
+            });*/
