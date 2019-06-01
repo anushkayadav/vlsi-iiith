@@ -97,6 +97,14 @@ td{
     overflow:auto;
 }
 
+#connector_canvas{
+  position:absolute;
+  width:100%;
+  height:100%;
+  stroke:#5c96bc;
+  stroke-width:2
+}
+
 .graph-zone {
     border: 1px dotted #9C9898;
     height:500px;

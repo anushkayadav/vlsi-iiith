@@ -45,8 +45,10 @@ function init() {
 	var diagram = [];
 	var canvas = $(".canvas");
 	$(".componentButton").draggable({
-                helper: "clone"
-            });
+    helper: "clone"
+  });
+
+
 	canvas.droppable({
                 drop: function(event, ui) {
                 	//alert("tool dropped");
