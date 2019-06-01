@@ -103,7 +103,8 @@ td{
   height:100%;
   stroke:#5c96bc;
   stroke-width:2
-}
+  z-index:2;
+} 
 
 .graph-zone {
     border: 1px dotted #9C9898;
