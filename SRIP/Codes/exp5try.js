@@ -1,11 +1,9 @@
-!function(a){function f(a,b){if(!(a.originalEvent.touches.length>1)){a.preventDefault();var c=a.originalEvent.changedTouches[0],d=document.createEvent("MouseEvents");d.initMouseEvent(b,!0,!0,window,1,c.screenX,c.screenY,c.clientX,c.clientY,!1,!1,!1,!1,0,null),a.target.dispatchEvent(d)}}if(a.support.touch="ontouchend"in document,a.support.touch){var e,b=a.ui.mouse.prototype,c=b._mouseInit,d=b._mouseDestroy;b._touchStart=function(a){var b=this;!e&&b._mouseCapture(a.originalEvent.changedTouches[0])&&(e=!0,b._touchMoved=!1,f(a,"mouseover"),f(a,"mousemove"),f(a,"mousedown"))},b._touchMove=function(a){e&&(this._touchMoved=!0,f(a,"mousemove"))},b._touchEnd=function(a){e&&(f(a,"mouseup"),f(a,"mouseout"),this._touchMoved||f(a,"click"),e=!1)},b._mouseInit=function(){var b=this;b.element.bind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),c.call(b)},b._mouseDestroy=function(){var b=this;b.element.unbind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),d.call(b)}}}(jQuery);
-
-
 
 
 
 $(init);
-function init() {
+
+function init(){
 
 
   function input(){
@@ -91,11 +89,11 @@ function init() {
                     } else if(ui.helper.hasClass("npn")){
                         node.type = "npn";
 
-                    } else if(ui.helper.hasClass("input")){
-                        node.type = "input";
+                    } else if(ui.helper.hasClass("inputsym")){
+                        node.type = "inputsym";
 
-                    } else if(ui.helper.hasClass("output")){
-                        node.type = "output";
+                    } else if(ui.helper.hasClass("outputsym")){
+                        node.type = "outputsym";
 
                     } else {
                         return;
@@ -110,9 +108,79 @@ function init() {
 
                 }
             });
+
+  function interact()
+{
+  $(".output").mousedown(function(event) {
+    var cur_ui_item = $(this).closest('.ui-item');
+    var connector=$('#connector_canvas');
+    var cur_con;
+
+    if(!$(cur_ui_item).data('output_lines'))
+      $(cur_ui_item).data('output_lines', []);
+
+    if(!$(cur_ui_item).data('line',))
+    {
+      cur_con = $(document.createElementNS('http://www.w3.org/2000/svg','line'));
+      cur_ui_item.data('line', cur_con);
+    }
+    else cur_con = cur_ui_item.data('line');
+
+    connector.append(cur_con);
+    var start= cur_ui_item.position();
+    cur_con.attr('x1', start.left).attr('y1', start.top+1).attr('x2',start.left+1).attr('y2',start.top+1);
+  });
+
+  $(".output").draggable({
+    containment: canvas,
+    drag: function(event,ui){
+      var _end=$(event.target).parent().position();
+      var end= $(event.target).position();
+      if(_end&&end)
+        $(event.target).parent().data('line').attr('x2',end.left+_end.left+5).attr('y2',end.top+_end.top+2);
+    },
+
+    // stop: function(event,ui){
+    //  if(!ui.helper.closest('.gate').data('line'))
+    //    return;
+    //  ui.helper.css({
+    //    top:-1,
+    //    left:-2
+    //  });
+    //  ui.helper.closest('.gate').data('line').remove();
+    //  ui.helper.closest('.gate').data('line',null);
+    //  console.log("stopped");
+    // }
+  });
+
+  $(".ui-item").droppable({
+    accept: '.output',
+    drop: function(event,ui){
+            var item = ui.draggable.closest('.ui-item');
+            $(this).data('connected-item',item);
+            ui.draggable.css({top:-2,left:-2});
+            item.data('lines').push(item.data('line'));
+    
+            if($(this).data('connected-lines')){
+                $(this).data('connected-lines').push(item.data('line'));
+        
+                var y2_ = parseInt(item.data('line').attr('y2'));
+                item.data('line').attr('y2',y2_+$(this).data('connected-lines').length*5);
+            }
+            else $(this).data('connected-lines',[item.data('line')]);
+            item.data('line',null);
+            console.log('dropped');
+        }
+    
+  });
+}
+
+
 	function renderDiagram(diagram) {
 		//console.log(diagram);
 		canvas.empty();
+    var s='<svg id="connector_canvas"></svg>';
+    canvas.append(s);
 		for(var d in diagram){
 			var node = diagram[d];
 			console.log(node);
@@ -141,10 +209,10 @@ function init() {
              } else if(node.type === "npn") {
            html = "<img src='images/npn.png' style='width:50px;height:50px;'>";
             
-            } else if(node.type === "input") {
+            } else if(node.type === "inputsym") {
             html = "<div><img src='images/input.gif' style='width:50px;height:50px;'></div>";
         	
-        	} else if(node.type === "output") {
+        	} else if(node.type === "outputsym") {
             html = "<div><img src='images/output.gif' style='width:50px;height:50px;'></div>";
         }
 
@@ -153,7 +221,9 @@ function init() {
         var dom = $(html).css({
                         "position": "absolute",
                         "top": node.position.top,
-                        "left": node.position.left
+                        "left": node.position.left,
+                        "z-index":2,
+                        "max-width":"7%"
                     }).draggable({
                         stop: function(event, ui) {
                             console.log(ui);
@@ -167,75 +237,59 @@ function init() {
                                 }
                             }
                         }
-                    }).attr("id", node._id);
+                    }).attr("id", node._id).addClass('ui-item');;
                     dom.append(input()).append(output());
 
                     canvas.append(dom);
 
                 }
-        
-
-		}
+                interact();
+  }
 		
 
-        var gcount=0;//count no. of times ground dropped
-        var ccount=0;//count no. of time capacitor dropped
-        var icount=0;//count no. of inputs dropped
-        var ocount=0;//count no. of outputs dropped
-        var invcount=0;//inverter dropped
+   var gcount=0;//count no. of times ground dropped
+   var ccount=0;//count no. of time capacitor dropped
+   var icount=0;//count no. of inputs dropped
+   var ocount=0;//count no. of outputs dropped
+   var invcount=0;//inverter dropped
 
 
 
-		$( ".button" ).click(function() {
-			$(".canvas").empty();
-			diagram=[];//clear the digram array
-             gcount=0;//set all counts to 0 again
-             ccount=0;
-             icount=0;
-             ocount=0;
-             invcount=0;
+	$( ".button" ).click(function() {
+    $(".canvas").empty();
+    diagram=[];//clear the digram array
+    gcount=0;//set all counts to 0 again
+    ccount=0;
+    icount=0;
+    ocount=0;
+    invcount=0;
+  });
 
 
-		});
+  $( ".vSource" ).on( "drag", function( event, ui ) {
+    alert("Voltage source is not used in this experiment...Try Again");
+    //$( ".vSource" ).draggable({ disabled: true });
+  } );
 
-        //$( ".vSource" ).click(function() {
-            //$( ".vSource" ).draggable({ disabled: true });
-           // alert("Voltage source is not used in this experiment...Try Again");
-       // });
+  $( ".resistor" ).on( "drag", function( event, ui ) {
+      alert("Resistor is not used in this experiment...Try Again");
+      //$( ".vSource" ).draggable({ disabled: true });
+  } );
 
-       /*document.addEventListener("drop", function(event) {
-        event.preventDefault()
-        if(event.target.hasClass==='vSource'){
-            $( ".vSource" ).draggable({ disabled: true });
-            alert("Voltage source is not used in this experiment...Try Again");
-            
-        }
-    })*/
+  $( ".npn" ).on( "drag", function( event, ui ) {
+      alert("npn is not used in this experiment...Try Again");
+      //$( ".vSource" ).draggable({ disabled: true });
+  } );
 
-    $( ".vSource" ).on( "drag", function( event, ui ) {
-        alert("Voltage source is not used in this experiment...Try Again");
-        //$( ".vSource" ).draggable({ disabled: true });
-    } );
-
-    $( ".resistor" ).on( "drag", function( event, ui ) {
-        alert("Resistor is not used in this experiment...Try Again");
-        //$( ".vSource" ).draggable({ disabled: true });
-    } );
-
-    $( ".npn" ).on( "drag", function( event, ui ) {
-        alert("npn is not used in this experiment...Try Again");
-        //$( ".vSource" ).draggable({ disabled: true });
-    } );
-
-    $( ".diode" ).on( "drag", function( event, ui ) {
-        alert("diode is not used in this experiment...Try Again");
-        //$( ".vSource" ).draggable({ disabled: true });
-    } );
+  $( ".diode" ).on( "drag", function( event, ui ) {
+      alert("diode is not used in this experiment...Try Again");
+      //$( ".vSource" ).draggable({ disabled: true });
+  } );
 
 
     
 
-    $( ".canvas" ).on( "drop", function( event, ui ) {
+  $( ".canvas" ).on( "drop", function( event, ui ) {
         
         if(ui.helper.hasClass("ground")){
             alert("ground dropped");
@@ -255,21 +309,21 @@ function init() {
             }
         }
 
-        if(ui.helper.hasClass("input")){
+        if(ui.helper.hasClass("inputsym")){
             alert("input dropped");
             icount=icount+1;
             if(icount>=1){
                 alert("Can have maximum one input !");
-                $( ".input" ).draggable({ disabled: true });
+                $( ".inputsym" ).draggable({ disabled: true });
             }
         }
 
-        if(ui.helper.hasClass("output")){
+        if(ui.helper.hasClass("outputsym")){
             alert("output dropped");
             ocount=ocount+1;
             if(ocount>=1){
                 alert("Can have maximum one output !");
-                $( ".output" ).draggable({ disabled: true });
+                $( ".outputsym" ).draggable({ disabled: true });
             }
         }
 
@@ -301,163 +355,15 @@ function init() {
         if(invcount<5){
           alert("circuit not complete yet!");
         }
-        
-
-      
-    
-
-    });
+        });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    $('.ui-item').draggable({
-  containment: ".canvas",
-  drag: function( event, ui ) {
-           var lines = $(this).data('lines');
-           var con_item =$(this).data('connected-item');
-           var con_lines = $(this).data('connected-lines');
   
-           if(lines) {
-             lines.forEach(function(line,id){
-                $(line).attr('x1',$(this).position().left).attr('y1',$(this).position().top+1);  
-             }.bind(this));
-           }
-    
-           if(con_lines){
-               con_lines.forEach(function(con_line,id){
-                  $(con_line).attr('x2',$(this).position().left+5)
-                        .attr('y2',$(this).position().top+(parseInt($(this).css('height'))/2)+(id*5));
-               }.bind(this));
-              
-           }
-           
-     }
-});
-
-$('.ui-item').droppable({
-  accept: '.connect',
-  drop: function(event,ui){
-     var item = ui.draggable.closest('.ui-item');
-     $(this).data('connected-item',item);
-     ui.draggable.css({top:-2,left:-2});
-     item.data('lines').push(item.data('line'));
-    
-     if($(this).data('connected-lines')){
-        $(this).data('connected-lines').push(item.data('line'));
-        
-         var y2_ = parseInt(item.data('line').attr('y2'));
-         item.data('line').attr('y2',y2_+$(this).data('connected-lines').length*5);
-        
-     }else $(this).data('connected-lines',[item.data('line')]);
-    
-     item.data('line',null);
-    console.log('dropped');
-  }
-});
-
-
-    $('.connect').draggable({
-     containment: ".canvas",
-     drag: function( event, ui ) {
-       var _end = $(event.target).parent().position();
-       var end = $(event.target).position();
-       if(_end&&end)  
-       $(event.target).parent().data('line')
-                                .attr('x2',end.left+_end.left+5).attr('y2',end.top+_end.top+2);
-      },
-     stop: function(event,ui) {
-        if(!ui.helper.closest('.ui-item').data('line')) return;
-        ui.helper.css({top:-2,left:-2});
-        ui.helper.closest('.ui-item').data('line').remove();
-        ui.helper.closest('.ui-item').data('line',null);
-        console.log('stopped');
-      }
-});
-
-
-$('.connect').on('mousedown',function(e){
-    var cur_ui_item = $(this).closest('.ui-item');
-    var connector = $('#connector_canvas');
-    var cur_con;
-  
-  if(!$(cur_ui_item).data('lines')) $(cur_ui_item).data('lines',[]);
-  
-  if(!$(cur_ui_item).data('line')){
-         cur_con = $(document.createElementNS('http://www.w3.org/2000/svg','line'));
-         cur_ui_item.data('line',cur_con);
-    } else cur_con = cur_ui_item.data('line');
-  
-    connector.append(cur_con);
-    var start = cur_ui_item.position();
-     cur_con.attr('x1',start.left).attr('y1',start.top+1);
-     cur_con.attr('x2',start.left+1).attr('y2',start.top+1);
-});
 
 
 
+   
+
+}
 
 
-
-
-
-
-	}
-
-
-
-
-
-
-/* var input_div='<div class="input"></div>';
-            var input1=$(input_div).css({
-              "position":"absolute",
-              "width":"8px",
-              "height":"8px",
-              "left":"-2px",
-              "top":"22%",
-              "background-color":"#47cf73",
-              "border-radius":"50%",
-              "z-index":"5",
-            });
-
-             var output_div='<div class="output"></div>';
-            var output=$(output_div).css({
-              "position":"absolute",
-              "width":"8px",
-              "height":"8px",
-              "right":"-2px",
-              "top":"45%",
-              "background-color":"#47cf73",
-              "border-radius":"50%",
-              "z-index":"5",
-            });*/
