@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.css">
+        <title>Experiment</title>
+        <style type="text/css">
+        	.drag{
+        		z-index: 2;
+        	}
+          .img-thumbnail{
+            background-color: transparent;
+            border: none;
+           
+          }
+          #connector_canvas{
+            position:absolute;
+            width:100%;
+            height:100%;
+            stroke:#5c96bc;
+            stroke-width:2
+          }
+          .button{
+            background-color: #ffaa00;
+            padding:5px;
+            margin:3px;
+            border-radius:5px;
+            cursor: pointer;
+            align-content: left;
+          }
+          #Simulate {
+            color: white;
+            background-color: #4CAF50; /* Green */
+            padding:5px;
+            margin:3px;
+            border-radius:5px;
+            cursor: pointer;
+            align-content: left;
+          }
+
+          /*.componentButton{
+            background: #F4E57F;
+            color: #565527;
+            border-radius: 5px 5px 5px 5px;
+            margin: 1px;
+            border: solid;
+            cursor: crosshair;
+            border-width: 2px;
+            
+            padding:1px;
+            width: 60px;
+            height: 60px;
+            
+  
+
+
+}*/
+
+.componentButton:hover{
+  background: #ffff55;
+}
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-2" id="tools">
+                <div id="accordion">
+                  <div class="card">
+                    <div class="card-header p-0" id="headingOne">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Tools
+                        </button>
+                      </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+            						<div id="basic_elements">
+            						    <div class="row">
+            						    	<div class="col-6 mg-0 drag tool_1 inverter" id="inverter">
+            						    		<img src="images/not.svg" class="img-thumbnail componentButton">
+            						    	</div>
+            						    	<div class="col-6 mg-0 drag tool_2 capacitor" id="capacitor">
+            						    		<img src="images/capacitor.png" class="img-thumbnail componentButton" >
+            						    	</div>
+            						    </div>
+            						    <div class="row">
+            						    	<div class="col-6 mg-0 drag tool_3 inputsym" id="inputsym">
+            						    		<img src="images/input.gif" class="img-thumbnail componentButton">
+            						    	</div>
+            						    	<div class="col-6 mg-0 drag tool_4 outputsym" id="outputsym">
+            						    		<img src="images/output.gif" class="img-thumbnail componentButton">
+            						    	</div>
+            						    </div>
+            						    <div class="row">
+            						    	<div class="col-6 mg-0 drag tool_5 ground" id="ground">
+            						    		<img src="images/ground.png" class="img-thumbnail componentButton" style="width:40px;height:60px;">
+            						    	</div>
+            						    	<div class="col-6 mg-0 drag tool_6 resistor" id="resistor">
+            						    		<img src="images/resistor.png" class="img-thumbnail componentButton">
+            						    	</div>
+            						    </div>
+            						    <div class="row">
+            						    	<div class="col-6 mg-0 drag tool_7 vSource" id="vSource">
+            						    		<img src="images/voltage.png" class="img-thumbnail componentButton" style="width:40px;height:60px;">
+            						    	</div>
+            						    	<div class="col-6 mg-0 drag tool_8 npn" id="npn">
+            						    		<img src="images/npn.png" class="img-thumbnail componentButton">
+            						    	</div>
+            						    </div> 
+            						</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Reset/Simulate
+                        </button>
+                      </h5>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div class="card-body">
+                        <span id='clear' class="button">Reset</span><br><br>
+                         <span id='Simulate' class="button">Simulate</span>
+
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Instructions
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-10 p-0" id="drop_zone" >
+              <svg id="connector_canvas"></svg>
+            </div>
+        </div>
+
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>
