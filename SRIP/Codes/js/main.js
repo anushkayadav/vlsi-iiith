@@ -3,6 +3,11 @@ function init(){
 var input1_id=0;
 var input2_id=0;
 var id=0;
+var inp_inv=0;
+var inv_inv=0;
+var inv_outp=0;
+var inv_cap=0;
+var cap_grd=0;
 
 function input()
 {
@@ -43,6 +48,7 @@ tools.draggable({helper:"clone"});
 var canvas=$("#drop_zone").droppable({
 	drop: function(event, ui){
 		var node={_id: id,position: ui.helper.position()};
+
 		node.position.left-=$('#tools').width();
 		id=id+1;
 		if(ui.helper.hasClass("drag")){
@@ -81,6 +87,8 @@ function interact()
 
 		cur_con.attr('x1',x1).attr('y1', y1).attr('x2',x1+1).attr('y2',y1);
 	});
+
+
 	$(".output").draggable({
 		containment: canvas,
 		drag: function(event,ui){
@@ -99,11 +107,15 @@ function interact()
 			console.log("stopped");
 		}
 	});
+
+
 	$(".gate").droppable({
 		accept: '.output',
 		drop: function(event,ui){
 			var gate=ui.draggable.closest('.gate'); //the gate whose output is being dragged
 			var gate_id=gate.attr('id');
+			var gate_child=gate.children();
+			var now_child=$(this).children();
 			
 			ui.draggable.css({top:"45%",right:"-2px",left:"auto"});
 			gate.data('output_line',gate.data('line'));
@@ -126,6 +138,85 @@ function interact()
 		    }
 		    else gate.data('line').remove();
 		    gate.data('line', null);
+		   // console.log("dropped");
+		    //console.log(gate);
+		    //console.log(now_child);
+
+		    
+
+		   if($(gate_child[0]).hasClass("inverter")){
+		   console.log("dropped from inverter");
+		  }
+		  if($(now_child[0]).hasClass("inverter")){
+		   console.log("dropped to inverter");
+		  }
+
+		   if($(gate_child[0]).hasClass("capacitor")){
+		   console.log("dropped from capacitorr");
+		  }
+		  if($(now_child[0]).hasClass("capacitor")){
+		   console.log("dropped to capacitor");
+		  }
+
+		  if($(gate_child[0]).hasClass("ground")){
+		   console.log("dropped from ground");
+		  }
+		  if($(now_child[0]).hasClass("ground")){
+		   console.log("dropped to ground");
+		  }
+
+		   if($(gate_child[0]).hasClass("inputsym")){
+		   console.log("dropped from input");
+		  }
+		  if($(now_child[0]).hasClass("inputsym")){
+		   console.log("dropped to input");
+		  }
+
+		  if($(gate_child[0]).hasClass("outputsym")){
+		   console.log("dropped from output");
+		  }
+		  if($(now_child[0]).hasClass("outputsym")){
+		   console.log("dropped to output");
+		  }
+
+
+		  if(($(gate_child[0]).hasClass("inverter"))&&($(now_child[0]).hasClass("inverter"))){
+		  	inv_inv=inv_inv+1;
+		  	 console.log("inv inv is",inv_inv);
+		  }
+
+		  if(($(gate_child[0]).hasClass("inputsym"))&&($(now_child[0]).hasClass("inverter"))){
+		  	inp_inv=inp_inv+1;
+		  	 console.log("inp inv is",inp_inv);
+		  }
+
+		  if(($(gate_child[0]).hasClass("inverter"))&&($(now_child[0]).hasClass("outputsym"))){
+		  	inv_outp=inv_outp+1;
+		  	 console.log("inv outp is",inv_outp);
+		  }
+
+		  if(($(gate_child[0]).hasClass("inverter"))&&($(now_child[0]).hasClass("capacitor"))){
+		  	inv_cap=inv_cap+1;
+		  	 console.log("inv cap is",inv_cap);
+		  }
+
+		  if(($(gate_child[0]).hasClass("capacitor"))&&($(now_child[0]).hasClass("ground"))){
+		  	cap_grd=cap_grd+1;
+		  	 console.log("cap grd is",cap_grd);
+		  }
+
+
+		 
+
+
+
+
+
+
+
+
+
+
 		}
 	});
 }
@@ -146,7 +237,7 @@ function renderDiagram(diagram){
 		console.log(node);
             var html = "";
             if(node.type === "ground") {
-                html = '<div><img src="images/ground.png" class="img-thumbnail" style="width:30px ;height:60px;"></div>';
+                html = '<div><img src="images/ground.png" class="img-thumbnail ground" style="width:30px ;height:60px;"></div>';
             }
             else if(node.type === "vSource") {
                 html = "<div><img src='images/voltage.png' style='width:50px;height:50px;'></div>";
@@ -158,10 +249,10 @@ function renderDiagram(diagram){
                 html = "<img src='images/wire.gif' style='width:50px;height:50px;'>";
             }
             else if(node.type === "capacitor") {
-                html = "<div><img src='images/capacitor.png' class='img-thumbnail' style='width:90px;height:45px;'></div>";
+                html = "<div><img src='images/capacitor.png' class='img-thumbnail capacitor' style='width:90px;height:45px;'></div>";
             }
             else if(node.type === "inverter") {
-                html = "<div><img src='images/not.svg' class='img-thumbnail' style='width:100px;height:40px;'></div>";
+                html = "<div><img src='images/not.svg' class='img-thumbnail inverter' style='width:100px;height:40px;'></div>";
             }
             else if(node.type === "diode") {
                 html = "<img src='images/diode.png' style='width:50px;height:50px;'>";
@@ -170,10 +261,10 @@ function renderDiagram(diagram){
                 html = "<img src='images/npn.png' style='width:50px;height:50px;'>";
             }
             else if(node.type === "inputsym") {
-                html = "<div><img src='images/input.gif' class='img-thumbnail' style='width:50px;height:50px;'></div>";
+                html = "<div><img src='images/input.gif' class='img-thumbnail inputsym' style='width:50px;height:50px;'></div>";
             }
             if(node.type === "outputsym") {
-                html = "<div><img src='images/output.gif' class='img-thumbnail' style='width:50px;height:50px;'></div>";
+                html = "<div><img src='images/output.gif' class='img-thumbnail outputsym' style='width:50px;height:50px;'></div>";
             }
 
 		var dom=$(html).css({
@@ -205,25 +296,7 @@ function renderDiagram(diagram){
 
 
 
-$("#Simulate").click(function(event) {
 
-	if(gcount==0){
-          alert("ground is misssing");
-        }
-        if(icount==0){
-          alert("input is misssing");
-        }
-        if(ocount==0){
-          alert("output is misssing");
-        }
-        if(ccount==0){
-          alert("capacitor is misssing");
-        }
-        if(invcount<5){
-          alert("circuit not complete yet!");
-        }
-	
-});
 
     var gcount=0;//count no. of times ground dropped
     var ccount=0;//count no. of time capacitor dropped
@@ -240,6 +313,10 @@ $("#Simulate").click(function(event) {
         icount=0;
         ocount=0;
         invcount=0;
+         $( ".ground" ).draggable({ disabled: false });
+         $( ".capacitor" ).draggable({ disabled: false });
+         $( ".inputsym" ).draggable({ disabled: false });
+         $( ".outputsym" ).draggable({ disabled: false });
     });
 
 
@@ -312,5 +389,39 @@ $("#Simulate").click(function(event) {
             }
         }
     } );
+
+
+    $( ".simulate" ).click(function() {
+
+        if(gcount==0){
+          alert("Hint : ground is misssing");
+        }
+        if(icount==0){
+          alert("Hint : input is misssing");
+        }
+        if(ocount==0){
+          alert("Hint : output is misssing");
+        }
+        if(ccount==0){
+          alert("Hint : capacitor is misssing");
+        }
+        if(invcount<5){
+          alert("Hint : Check no. of inverters");
+        }
+
+        if((gcount==1)&& (icount==1) && (ocount==1) && (ccount==1) && (invcount==5)){
+        	alert("number of components is complete now")
+        	if((inp_inv==1) && (inv_inv==4) && (inv_outp==1) && (inv_cap==1) && (cap_grd==1)){
+        		alert("circuit complete");
+        		window.open("mygraph.html");
+
+        	}
+        }
+
+    });
+
+
+
+
 
 }
