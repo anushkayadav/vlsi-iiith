@@ -20,21 +20,37 @@
             stroke-width:2
           }
           .button{
-            background-color: #ffaa00;
+            background-color: rgba(255, 209, 0,0.6);
             padding:5px;
             margin:3px;
             border-radius:5px;
             cursor: pointer;
-            align-content: left;
+            align-content: center;
+            border: 5px;
           }
           #Simulate {
-            color: white;
-            background-color: #4CAF50; /* Green */
+            color: black;
+            background-color: rgb(125, 255, 145);
             padding:5px;
             margin:3px;
             border-radius:5px;
             cursor: pointer;
-            align-content: left;
+            align-content: center;
+          }
+
+          #main {
+            text-align: center;
+            font-weight: bold;
+            font-size: 30px;
+            font-family:"arial";
+            margin: 5px;
+            color: rgb(71, 0, 157);
+          }
+
+          #drop_zone{
+            border-style: dotted;
+            border-width: 1.5px;
+            border-color: rgb(0, 201, 255);
           }
 
           /*.componentButton{
@@ -61,6 +77,8 @@
         </style>
     </head>
     <body>
+      <div id="main">EXPERIMENT</div>
+      <hr>
         <div class="row">
             <div class="col-2" id="tools">
                 <div id="accordion">
@@ -78,34 +96,34 @@
             						<div id="basic_elements">
             						    <div class="row">
             						    	<div class="col-6 mg-0 drag tool_1 inverter" id="inverter">
-            						    		<img src="images/not.svg" class="img-thumbnail componentButton">
+            						    		<img src="images/invertersym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
             						    	</div>
             						    	<div class="col-6 mg-0 drag tool_2 capacitor" id="capacitor">
-            						    		<img src="images/capacitor.png" class="img-thumbnail componentButton" >
+            						    		<img src="images/capacitorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" >
             						    	</div>
             						    </div>
             						    <div class="row">
             						    	<div class="col-6 mg-0 drag tool_3 inputsym" id="inputsym">
-            						    		<img src="images/input.gif" class="img-thumbnail componentButton">
+            						    		<img src="images/inputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
             						    	</div>
             						    	<div class="col-6 mg-0 drag tool_4 outputsym" id="outputsym">
-            						    		<img src="images/output.gif" class="img-thumbnail componentButton">
+            						    		<img src="images/outputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
             						    	</div>
             						    </div>
             						    <div class="row">
             						    	<div class="col-6 mg-0 drag tool_5 ground" id="ground">
-            						    		<img src="images/ground.png" class="img-thumbnail componentButton" style="width:40px;height:60px;">
+            						    		<img src="images/groundsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
             						    	</div>
             						    	<div class="col-6 mg-0 drag tool_6 resistor" id="resistor">
-            						    		<img src="images/resistor.png" class="img-thumbnail componentButton">
+            						    		<img src="images/resistorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
             						    	</div>
             						    </div>
             						    <div class="row">
             						    	<div class="col-6 mg-0 drag tool_7 vSource" id="vSource">
-            						    		<img src="images/voltage.png" class="img-thumbnail componentButton" style="width:40px;height:60px;">
+            						    		<img src="images/voltage.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
             						    	</div>
             						    	<div class="col-6 mg-0 drag tool_8 npn" id="npn">
-            						    		<img src="images/npn.png" class="img-thumbnail componentButton">
+            						    		<img src="images/npn.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
             						    	</div>
             						    </div> 
             						</div>

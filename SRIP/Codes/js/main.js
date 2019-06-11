@@ -252,7 +252,7 @@ function renderDiagram(diagram){
                 html = "<div><img src='images/capacitor.png' class='img-thumbnail capacitor' style='width:90px;height:45px;'></div>";
             }
             else if(node.type === "inverter") {
-                html = "<div><img src='images/not.svg' class='img-thumbnail inverter' style='width:100px;height:40px;'></div>";
+                html = "<div><img src='images/inverter1.png' class='img-thumbnail inverter' style='width:120px;height:50px;'></div>";
             }
             else if(node.type === "diode") {
                 html = "<img src='images/diode.png' style='width:50px;height:50px;'>";
@@ -261,10 +261,10 @@ function renderDiagram(diagram){
                 html = "<img src='images/npn.png' style='width:50px;height:50px;'>";
             }
             else if(node.type === "inputsym") {
-                html = "<div><img src='images/input.gif' class='img-thumbnail inputsym' style='width:50px;height:50px;'></div>";
+                html = "<div><img src='images/inputsym.png' class='img-thumbnail inputsym' style='width:70px;height:70px;'></div>";
             }
             if(node.type === "outputsym") {
-                html = "<div><img src='images/output.gif' class='img-thumbnail outputsym' style='width:50px;height:50px;'></div>";
+                html = "<div><img src='images/outputsym.png' class='img-thumbnail outputsym' style='width:70px;height:70px;'></div>";
             }
 
 		var dom=$(html).css({
@@ -317,6 +317,12 @@ function renderDiagram(diagram){
          $( ".capacitor" ).draggable({ disabled: false });
          $( ".inputsym" ).draggable({ disabled: false });
          $( ".outputsym" ).draggable({ disabled: false });
+         $( ".inverter" ).draggable({ disabled: false });
+         inp_inv=0;
+		 inv_inv=0;
+		 inv_outp=0;
+		 inv_cap=0;
+		 cap_grd=0;
     });
 
 
