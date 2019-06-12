@@ -124,7 +124,7 @@ function interact()
 		    var y_abs=parseInt(gate.data('line').attr('y2'));
 		    var this_x=parseInt($(this).css('left'));
 		    var this_y=parseInt($(this).css('top'));
-		    if((x_abs - this_x)< $(this).width()/2)
+		    if((x_abs - this_x)< $(this).width())
 		    {
 		    	if($(this).data('inp'))
 		    		$(this).data('inp').remove();
@@ -146,9 +146,11 @@ function interact()
 
 		   if($(gate_child[0]).hasClass("inverter")){
 		   console.log("dropped from inverter");
+		   //document.getElementById("comments").innerHTML ="dropped from inverter";
 		  }
 		  if($(now_child[0]).hasClass("inverter")){
 		   console.log("dropped to inverter");
+		   //document.getElementById("comments").innerHTML ="dropped to inverter";
 		  }
 
 		   if($(gate_child[0]).hasClass("capacitor")){
@@ -237,7 +239,7 @@ function renderDiagram(diagram){
 		console.log(node);
             var html = "";
             if(node.type === "ground") {
-                html = '<div><img src="images/ground.png" class="img-thumbnail ground" style="width:30px ;height:60px;"></div>';
+                html = '<div><img src="images/groundsym.png" class="img-thumbnail ground" style="width:70px ;height:70px;"></div>';
             }
             else if(node.type === "vSource") {
                 html = "<div><img src='images/voltage.png' style='width:50px;height:50px;'></div>";
@@ -419,7 +421,8 @@ function renderDiagram(diagram){
         	alert("number of components is complete now")
         	if((inp_inv==1) && (inv_inv==4) && (inv_outp==1) && (inv_cap==1) && (cap_grd==1)){
         		alert("circuit complete");
-        		window.open("mygraph.html");
+        		//window.open("mygraph.html");
+        		$("#mygraph").attr('src',"mygraph1.png");
 
         	}
         }

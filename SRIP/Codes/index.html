@@ -41,16 +41,35 @@
           #main {
             text-align: center;
             font-weight: bold;
-            font-size: 30px;
+            font-size: 25px;
             font-family:"arial";
             margin: 5px;
             color: rgb(71, 0, 157);
+           
+            align-content: center;
+          }
+
+          #sub {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            font-family:"arial";
+            margin: 5px;
+            color: black;
+            font-style: italic;
+            position: static;
           }
 
           #drop_zone{
             border-style: dotted;
             border-width: 1.5px;
             border-color: rgb(0, 201, 255);
+          }
+
+           #graph{
+           
+            border-width: 2px;
+            border-color: black;
           }
 
           /*.componentButton{
@@ -77,7 +96,11 @@
         </style>
     </head>
     <body>
-      <div id="main">EXPERIMENT</div>
+      <div id="main">EXPERIMENT<br>
+
+
+      </div>
+     <!--<div id="sub">Delay Estimation in Chain of Inverters</div>-->
       <hr>
         <div class="row">
             <div class="col-2" id="tools">
@@ -85,7 +108,7 @@
                   <div class="card">
                     <div class="card-header p-0" id="headingOne">
                       <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-link"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           Tools
                         </button>
                       </h5>
@@ -96,34 +119,34 @@
             						<div id="basic_elements">
             						    <div class="row">
             						    	<div class="col-6 mg-0 drag tool_1 inverter" id="inverter">
-            						    		<img src="images/invertersym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
+            						    		<img src="images/invertersym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="inverter">
             						    	</div>
             						    	<div class="col-6 mg-0 drag tool_2 capacitor" id="capacitor">
-            						    		<img src="images/capacitorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" >
+            						    		<img src="images/capacitorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="capacitor" >
             						    	</div>
             						    </div>
             						    <div class="row">
             						    	<div class="col-6 mg-0 drag tool_3 inputsym" id="inputsym">
-            						    		<img src="images/inputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
+            						    		<img src="images/inputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="input">
             						    	</div>
             						    	<div class="col-6 mg-0 drag tool_4 outputsym" id="outputsym">
-            						    		<img src="images/outputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
+            						    		<img src="images/outputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="output">
             						    	</div>
             						    </div>
             						    <div class="row">
             						    	<div class="col-6 mg-0 drag tool_5 ground" id="ground">
-            						    		<img src="images/groundsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
+            						    		<img src="images/groundsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" title="ground">
             						    	</div>
             						    	<div class="col-6 mg-0 drag tool_6 resistor" id="resistor">
-            						    		<img src="images/resistorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
+            						    		<img src="images/resistorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="resistor">
             						    	</div>
             						    </div>
             						    <div class="row">
             						    	<div class="col-6 mg-0 drag tool_7 vSource" id="vSource">
-            						    		<img src="images/voltage.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
+            						    		<img src="images/voltage.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="dc voltage">
             						    	</div>
             						    	<div class="col-6 mg-0 drag tool_8 npn" id="npn">
-            						    		<img src="images/npn.png" class="img-thumbnail componentButton" style="width:70px;height:70px;">
+            						    		<img src="images/npn.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="npn">
             						    	</div>
             						    </div> 
             						</div>
@@ -134,7 +157,7 @@
                     <div class="card-header" id="headingTwo">
                       <h5 class="mb-0">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          Reset/Simulate
+                          Reset
                         </button>
                       </h5>
                     </div>
@@ -142,7 +165,7 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                       <div class="card-body">
                         <span id='clear' class="button">Reset</span><br><br>
-                         <span id='Simulate' class="simulate">Simulate</span>
+                         
 
                       </div>
                     </div>
@@ -152,25 +175,63 @@
                     <div class="card-header" id="headingThree">
                       <h5 class="mb-0">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                          Instructions
+                          Simulate
                         </button>
                       </h5>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                       <div class="card-body">
-                         ->First Drag all the required components<br><br>
-                        ->Then connect them<br><br>
-                        ->To connnect:<br><br>
-                        drag from one ouput end to one input end 
+                        <span id='Simulate' class="simulate">Simulate</span>
                       </div>
                     </div>
                   </div>
                 </div>
             </div>
-            <div class="col-10 p-0" id="drop_zone" >
+            <div class="col-7 p-0" id="drop_zone" >
               <svg id="connector_canvas"></svg>
             </div>
+            <div class="col-3 p-0" id="graph" >
+              <img src="images/graph1.png" id="mygraph"  style="width:370px;height:529px;">
+            </div>
+             
         </div>
+
+        <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#help" aria-expanded="false" aria-controls="collapseTwo">
+                          Help
+                        </button>
+                      </h5>
+                    </div>
+
+                    <div id="help" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div class="card-body">
+                        <table>
+                          <tr>
+                            <td>
+                              Refer the figure to the right and follow these instructions.<br><br>
+                              1. Drag and drop all the required components from tools menu into the white region . <br><br>
+                              2. To connnect:<br>
+                              &nbsp;a. Drag from one ouput end of the component. <br>
+                              &nbsp;b. Drop the line on the target component. <br><br>
+                              3. Make sure all the componets are connected as per the figure<br><br>
+                              4. Click on <strong>Simulate</strong> to the observe the graph.<br><br> 
+                              5.Click on <strong>Reset</strong> to the clear the region.
+                            </td>
+                            <td>
+                              <img src="images/help2.png">
+                            </td>
+                      </tr>
+                        
+
+                      </div>
+                    </div>
+                    
+                  </div>
+    
+
+         
 
         
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
