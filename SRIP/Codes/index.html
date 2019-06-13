@@ -4,9 +4,9 @@
         <link rel="stylesheet" type="text/css" href="../libraries/bootstrap/css/bootstrap.css">
         <title>Experiment</title>
         <style type="text/css">
-        	.drag{
-        		z-index: 2;
-        	}
+          .drag{
+            z-index: 2;
+          }
           .img-thumbnail{
             background-color: transparent;
             border: none;
@@ -28,6 +28,12 @@
             align-content: center;
             border: 5px;
           }
+
+          .button:hover{
+            background: rgb(255, 255, 137);
+          }
+
+
           #Simulate {
             color: black;
             background-color: rgb(125, 255, 145);
@@ -36,6 +42,9 @@
             border-radius:5px;
             cursor: pointer;
             align-content: center;
+          }
+          #Simulate:hover{
+            background: rgb(223, 246, 125);
           }
 
           #main {
@@ -108,7 +117,7 @@
                   <div class="card">
                     <div class="card-header p-0" id="headingOne">
                       <h5 class="mb-0">
-                        <button class="btn btn-link"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           Tools
                         </button>
                       </h5>
@@ -116,40 +125,40 @@
 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                       <div class="card-body">
-            						<div id="basic_elements">
-            						    <div class="row">
-            						    	<div class="col-6 mg-0 drag tool_1 inverter" id="inverter">
-            						    		<img src="images/invertersym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="inverter">
-            						    	</div>
-            						    	<div class="col-6 mg-0 drag tool_2 capacitor" id="capacitor">
-            						    		<img src="images/capacitorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="capacitor" >
-            						    	</div>
-            						    </div>
-            						    <div class="row">
-            						    	<div class="col-6 mg-0 drag tool_3 inputsym" id="inputsym">
-            						    		<img src="images/inputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="input">
-            						    	</div>
-            						    	<div class="col-6 mg-0 drag tool_4 outputsym" id="outputsym">
-            						    		<img src="images/outputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="output">
-            						    	</div>
-            						    </div>
-            						    <div class="row">
-            						    	<div class="col-6 mg-0 drag tool_5 ground" id="ground">
-            						    		<img src="images/groundsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" title="ground">
-            						    	</div>
-            						    	<div class="col-6 mg-0 drag tool_6 resistor" id="resistor">
-            						    		<img src="images/resistorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="resistor">
-            						    	</div>
-            						    </div>
-            						    <div class="row">
-            						    	<div class="col-6 mg-0 drag tool_7 vSource" id="vSource">
-            						    		<img src="images/voltage.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="dc voltage">
-            						    	</div>
-            						    	<div class="col-6 mg-0 drag tool_8 npn" id="npn">
-            						    		<img src="images/npn.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="npn">
-            						    	</div>
-            						    </div> 
-            						</div>
+                        <div id="basic_elements">
+                            <div class="row">
+                              <div class="col-6 mg-0 drag tool_1 inverter" id="inverter">
+                                <img src="images/invertersym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="inverter">
+                              </div>
+                              <div class="col-6 mg-0 drag tool_2 capacitor" id="capacitor">
+                                <img src="images/capacitorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="capacitor" >
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6 mg-0 drag tool_3 inputsym" id="inputsym">
+                                <img src="images/inputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="input">
+                              </div>
+                              <div class="col-6 mg-0 drag tool_4 outputsym" id="outputsym">
+                                <img src="images/outputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="output">
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6 mg-0 drag tool_5 ground" id="ground">
+                                <img src="images/groundsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" title="ground">
+                              </div>
+                              <div class="col-6 mg-0 drag tool_6 resistor" id="resistor">
+                                <img src="images/resistorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="resistor">
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6 mg-0 drag tool_7 vSource" id="vSource">
+                                <img src="images/voltage.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="dc voltage">
+                              </div>
+                              <div class="col-6 mg-0 drag tool_8 npn" id="npn">
+                                <img src="images/npn.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="npn">
+                              </div>
+                            </div> 
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -181,11 +190,53 @@
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                       <div class="card-body">
+
                         <span id='Simulate' class="simulate">Simulate</span>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <div class="m-2 " >
+                      <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-warning btn-block" data-toggle="modal" data-target="#exampleModalLong" >
+                      Help
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Help</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+
+                              Refer the figure given below and follow these instructions.<br><br>
+                              1. Drag and drop all the required components from tools menu into the white region . <br><br>
+                              2. To connnect:<br>
+                              &nbsp;a. Drag from one ouput end of the component. <br>
+                              &nbsp;b. Drop the line on the target component. <br><br>
+                              3. Make sure all the componets are connected as per the figure<br><br>
+                              4. Click on <strong>Simulate</strong> to the observe the graph.<br><br> 
+                              5.Click on <strong>Reset</strong> to the clear the region.
+                            
+                              <img src="images/help2.png">
+                            
+                      
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->s
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            
             </div>
             <div class="col-7 p-0" id="drop_zone" >
               <svg id="connector_canvas"></svg>
@@ -196,46 +247,14 @@
              
         </div>
 
-        <div class="card">
-                    <div class="card-header" id="headingTwo">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#help" aria-expanded="false" aria-controls="collapseTwo">
-                          Help
-                        </button>
-                      </h5>
-                    </div>
 
-                    <div id="help" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                      <div class="card-body">
-                        <table>
-                          <tr>
-                            <td>
-                              Refer the figure to the right and follow these instructions.<br><br>
-                              1. Drag and drop all the required components from tools menu into the white region . <br><br>
-                              2. To connnect:<br>
-                              &nbsp;a. Drag from one ouput end of the component. <br>
-                              &nbsp;b. Drop the line on the target component. <br><br>
-                              3. Make sure all the componets are connected as per the figure<br><br>
-                              4. Click on <strong>Simulate</strong> to the observe the graph.<br><br> 
-                              5.Click on <strong>Reset</strong> to the clear the region.
-                            </td>
-                            <td>
-                              <img src="images/help2.png">
-                            </td>
-                      </tr>
-                        
-
-                      </div>
-                    </div>
-                    
-                  </div>
     
 
          
 
         
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src="../libraries/bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript" src="../libraries/bootstrap/js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
