@@ -1,0 +1,28 @@
+
+
+Follow these instruction to run the the experiment on simulator.
+
+
+1.Click on the "Tools" dropdown to show/hide the tools.
+
+2. Select the required componets from the "Tools" Dropdown.
+
+3. Drag the component from the tool box to the white rectangular region provided in the simualator.
+
+4.After dragging collecting all the components into the white region , start connectinf the components.
+
+5. To connnect:
+	a. Drag from one ouput end (green dot) of the component. 
+	b. Drop the line on the target component. 
+
+6. Make sure all the componets are connected as per requirements of experiment.
+
+7. Click on "SIMULATE" to the observe the graph.
+
+8.Click on "RESET" to the clear the region.
+
+9. Click on "HELP" button to check the instructions from simulator itself.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Remember : Start connecting the components only after "all of the required ones" are present in the white region.
