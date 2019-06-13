@@ -1,18 +1,18 @@
-$(init);
+
 function init(){
-var input1_id=0;
-var input2_id=0;
+//var input1_id=0;
+//var input2_id=0;
 var id=0;
-var inp_inv=0;
-var inv_inv=0;
-var inv_outp=0;
-var inv_cap=0;
-var cap_grd=0;
+var inpinvC=0;
+var invinvC=0;
+var invoutpC=0;
+var invcapC=0;
+var capgrdC=0;
 
 function input()
 {
-	var input_div='<div class="input"></div>';
-	var input=$(input_div).css({
+	var inputDiv="<div class='input'></div>";
+	var input=$(inputDiv).css({
 		position:"absolute",
 		width:"8px",
 		height: "8px",
@@ -27,8 +27,8 @@ function input()
 
 function output()
 {
-	var output_div='<div class="output"></div>';
-	var output=$(output_div).css({
+	var outputDiv="<div class='output'></div>";
+	var output=$(outputDiv).css({
 		position:"absolute",
 		width:"8px",
 		height: "8px",
@@ -40,52 +40,37 @@ function output()
 	});
 	return output;
 }
-
+var canvas=$("#drop_zone");
 var diagram={"devices":[],"connectors":[]};
 var tools=$(".drag");
 tools.draggable({helper:"clone"});
 
-var canvas=$("#drop_zone").droppable({
-	drop: function(event, ui){
-		var node={_id: id,position: ui.helper.position()};
 
-		node.position.left-=$('#tools').width();
-		id=id+1;
-		if(ui.helper.hasClass("drag")){
-			node.type=ui.helper.prevObject.attr("id");
-			console.log(node.type);
-		}
-		else{
-			id=id-1;
-			return;
-		}
-		diagram.devices.push(node);
-		renderDiagram(diagram);
-	}
-});
 
 
 
 function interact()
 {
 	$(".output").mousedown(function(event) {
-		var cur_gate = $(this).closest('.gate');
-		var connector=$('#connector_canvas');
-		var cur_con;
+		var curGate = $(this).closest(".gate");
+		var connector=$("#connector_canvas");
+		var curCon;
 
-		if(!$(cur_gate).data('line',))
+		if(!$(curGate).data("line",))
 		{
-			cur_con = $(document.createElementNS('http://www.w3.org/2000/svg','line'));
-			cur_gate.data('line', cur_con);
+			curCon = $(document.createElementNS("http://www.w3.org/2000/svg","line"));
+			curGate.data("line", curCon);
 		}
-		else cur_con = cur_gate.data('line');
-		connector.append(cur_con);
-		var start= cur_gate.position();
-		var output_position= $(this).position();
-		var x1=start.left+output_position.left+($(this).width()/2);
-		y1=start.top+output_position.top+($(this).height()/2);
+		else{
+			curCon = curGate.data("line");
+		} 
+		connector.append(curCon);
+		var start= curGate.position();
+		var outputPosition= $(this).position();
+		var x1=start.left+outputPosition.left+($(this).width()/2);
+		var y1=start.top+outputPosition.top+($(this).height()/2);
 
-		cur_con.attr('x1',x1).attr('y1', y1).attr('x2',x1+1).attr('y2',y1);
+		curCon.attr("x1",x1).attr("y1", y1).attr("x2",x1+1).attr("y2",y1);
 	});
 
 
@@ -94,130 +79,122 @@ function interact()
 		drag: function(event,ui){
 			var _end=$(event.target).parent().position();
 			var end= $(event.target).position();
-			if(_end&&end)
-				$(event.target).parent().data('line').attr('x2',end.left+_end.left+5).attr('y2',end.top+_end.top+2);
+			if(_end&&end){
+				$(event.target).parent().data("line").attr("x2",end.left+_end.left+5).attr("y2",end.top+_end.top+2);
+			}
+		
 		},
 
 		stop: function(event,ui){
-			if(!ui.helper.closest('.gate').data('line'))
+			if(!ui.helper.closest(".gate").data("line")){
 				return;
+			}
 			ui.helper.css({top:"45%",right:"-2px",left:"auto"});
-			ui.helper.closest('.gate').data('line').remove();
-			ui.helper.closest('.gate').data('line',null);
+			ui.helper.closest(".gate").data("line").remove();
+			ui.helper.closest(".gate").data("line",null);
 			console.log("stopped");
 		}
 	});
 
 
 	$(".gate").droppable({
-		accept: '.output',
+		accept: ".output",
 		drop: function(event,ui){
-			var gate=ui.draggable.closest('.gate'); //the gate whose output is being dragged
-			var gate_id=gate.attr('id');
-			var gate_child=gate.children();
-			var now_child=$(this).children();
+		var gate=ui.draggable.closest(".gate"); //the gate whose output is being dragged
+		var gateId=gate.attr("id");
+		var gateChild=gate.children();
+		var nowChild=$(this).children();
 			
-			ui.draggable.css({top:"45%",right:"-2px",left:"auto"});
-			gate.data('output_line',gate.data('line'));
+		ui.draggable.css({top:"45%",right:"-2px",left:"auto"});
+		gate.data("output_line",gate.data("line"));
 
-			var x_abs=parseInt(gate.data('line').attr('x2'));
-		    var y_abs=parseInt(gate.data('line').attr('y2'));
-		    var this_x=parseInt($(this).css('left'));
-		    var this_y=parseInt($(this).css('top'));
-		    if((x_abs - this_x)< $(this).width())
-		    {
-		    	if($(this).data('inp'))
-		    		$(this).data('inp').remove();
-		    	$(this).data('inp',gate.data('line'));
-		    	css_selector='#'+gate_id+" .input";
-		    	x2=$(this).position().left + $(css_selector).position().left+3;
-		    	y2=$(this).position().top + $(css_selector).position().top+3;
-		    	gate.data('line').attr('x2', x2).attr('y2', y2);
-		    	
-		    	
-		    }
-		    else gate.data('line').remove();
-		    gate.data('line', null);
-		   // console.log("dropped");
-		    //console.log(gate);
-		    //console.log(now_child);
+		var xAbs=parseInt((gate.data("line").attr("x2")),10);
+		var yAbs=parseInt((gate.data("line").attr("y2")),10);
+		var thisX=parseInt(($(this).css("left")),10);
+		var thisY=parseInt(($(this).css("top")),10);
+		if((xAbs - thisX)< $(this).width())
+		{
+			if($(this).data("inp")){
+				$(this).data("inp").remove();
+			}
+		    $(this).data("inp",gate.data("line"));
+		    var css_selector="#"+gateId+" .input";
+		    var x2=$(this).position().left + $(css_selector).position().left+3;
+		    var y2=$(this).position().top + $(css_selector).position().top+3;
+		    gate.data("line").attr("x2", x2).attr("y2", y2);
+		}
+		else {
+			gate.data("line").remove();
+		}
+		gate.data("line", null);
+		// console.log("dropped");
+		//console.log(gate);
+		//console.log(nowChild);
 
-		    
+		if($(gateChild[0]).hasClass("inverter")){
+			console.log("dropped from inverter");
+			//document.getElementById("comments").innerHTML ="dropped from inverter";
+		}
+		if($(nowChild[0]).hasClass("inverter")){
+			console.log("dropped to inverter");
+			//document.getElementById("comments").innerHTML ="dropped to inverter";
+		}
 
-		   if($(gate_child[0]).hasClass("inverter")){
-		   console.log("dropped from inverter");
-		   //document.getElementById("comments").innerHTML ="dropped from inverter";
-		  }
-		  if($(now_child[0]).hasClass("inverter")){
-		   console.log("dropped to inverter");
-		   //document.getElementById("comments").innerHTML ="dropped to inverter";
-		  }
+		if($(gateChild[0]).hasClass("capacitor")){
+			console.log("dropped from capacitorr");
+		}
+		if($(nowChild[0]).hasClass("capacitor")){
+			console.log("dropped to capacitor");
+		}
 
-		   if($(gate_child[0]).hasClass("capacitor")){
-		   console.log("dropped from capacitorr");
-		  }
-		  if($(now_child[0]).hasClass("capacitor")){
-		   console.log("dropped to capacitor");
-		  }
-
-		  if($(gate_child[0]).hasClass("ground")){
+		if($(gateChild[0]).hasClass("ground")){
 		   console.log("dropped from ground");
-		  }
-		  if($(now_child[0]).hasClass("ground")){
-		   console.log("dropped to ground");
-		  }
+		}
 
-		   if($(gate_child[0]).hasClass("inputsym")){
+		if($(nowChild[0]).hasClass("ground")){
+			console.log("dropped to ground");
+		}
+
+		if($(gateChild[0]).hasClass("inputsym")){
 		   console.log("dropped from input");
-		  }
-		  if($(now_child[0]).hasClass("inputsym")){
+		}
+
+		if($(nowChild[0]).hasClass("inputsym")){
 		   console.log("dropped to input");
-		  }
+		}
 
-		  if($(gate_child[0]).hasClass("outputsym")){
+		if($(gateChild[0]).hasClass("outputsym")){
 		   console.log("dropped from output");
-		  }
-		  if($(now_child[0]).hasClass("outputsym")){
+		}
+		if($(nowChild[0]).hasClass("outputsym")){
 		   console.log("dropped to output");
-		  }
+		}
 
 
-		  if(($(gate_child[0]).hasClass("inverter"))&&($(now_child[0]).hasClass("inverter"))){
-		  	inv_inv=inv_inv+1;
-		  	 console.log("inv inv is",inv_inv);
-		  }
+		if(($(gateChild[0]).hasClass("inverter"))&&($(nowChild[0]).hasClass("inverter"))){
+			invinvC=invinvC+1;
+		  	console.log("inv inv is",invinvC);
+		}
 
-		  if(($(gate_child[0]).hasClass("inputsym"))&&($(now_child[0]).hasClass("inverter"))){
-		  	inp_inv=inp_inv+1;
-		  	 console.log("inp inv is",inp_inv);
-		  }
+		if(($(gateChild[0]).hasClass("inputsym"))&&($(nowChild[0]).hasClass("inverter"))){
+			inpinvC=inpinvC+1;
+		  	console.log("inp inv is",inpinvC);
+		}
 
-		  if(($(gate_child[0]).hasClass("inverter"))&&($(now_child[0]).hasClass("outputsym"))){
-		  	inv_outp=inv_outp+1;
-		  	 console.log("inv outp is",inv_outp);
-		  }
+		if(($(gateChild[0]).hasClass("inverter"))&&($(nowChild[0]).hasClass("outputsym"))){
+			invoutpC=invoutpC+1;
+		  	console.log("inv outp is",invoutpC);
+		}
 
-		  if(($(gate_child[0]).hasClass("inverter"))&&($(now_child[0]).hasClass("capacitor"))){
-		  	inv_cap=inv_cap+1;
-		  	 console.log("inv cap is",inv_cap);
-		  }
+		if(($(gateChild[0]).hasClass("inverter"))&&($(nowChild[0]).hasClass("capacitor"))){
+			invcapC=invcapC+1;
+		  	console.log("inv cap is",invcapC);
+		}
 
-		  if(($(gate_child[0]).hasClass("capacitor"))&&($(now_child[0]).hasClass("ground"))){
-		  	cap_grd=cap_grd+1;
-		  	 console.log("cap grd is",cap_grd);
-		  }
-
-
-		 
-
-
-
-
-
-
-
-
-
+		if(($(gateChild[0]).hasClass("capacitor"))&&($(nowChild[0]).hasClass("ground"))){
+			capgrdC=capgrdC+1;
+		  	console.log("cap grd is",capgrdC);
+		}
 
 		}
 	});
@@ -278,10 +255,10 @@ function renderDiagram(diagram){
 		}).draggable({
 			containment:"parent",
 			drag: function(event,ui){
-				var lines= $(this).data('output_line');
-				var inp= $(this).data('inp');
-				if(lines){$(lines).attr('x1', $(this).position().left + $(this).width()).attr('y1', $(this).position().top + ($(this).height())/2);}
-				if(inp){$(inp).attr('x2', $(this).position().left + 2).attr('y2', $(this).position().top+ $('.input').position().top+5);}
+				var lines= $(this).data("output_line");
+				var inp= $(this).data("inp");
+				if(lines){$(lines).attr("x1", $(this).position().left + $(this).width()).attr("y1", $(this).position().top + ($(this).height())/2);}
+				if(inp){$(inp).attr("x2", $(this).position().left + 2).attr("y2", $(this).position().top+ $('.input').position().top+5);}
 			},
 			stop: function(event,ui){
 				var id=ui.helper.attr("id");
@@ -294,6 +271,25 @@ function renderDiagram(diagram){
 	}
 	interact();
 }
+
+canvas.droppable({
+	drop: function(event, ui){
+		var node={_id: id,position: ui.helper.position()};
+
+		node.position.left-=$("#tools").width();
+		id=id+1;
+		if(ui.helper.hasClass("drag")){
+			node.type=ui.helper.prevObject.attr("id");
+			console.log(node.type);
+		}
+		else{
+			id=id-1;
+			return;
+		}
+		diagram.devices.push(node);
+		renderDiagram(diagram);
+	}
+});
 
 
 
@@ -320,11 +316,11 @@ function renderDiagram(diagram){
          $( ".inputsym" ).draggable({ disabled: false });
          $( ".outputsym" ).draggable({ disabled: false });
          $( ".inverter" ).draggable({ disabled: false });
-         inp_inv=0;
-		 inv_inv=0;
-		 inv_outp=0;
-		 inv_cap=0;
-		 cap_grd=0;
+         inpinvC=0;
+		 invinvC=0;
+		 invoutpC=0;
+		 invcapC=0;
+		 capgrdC=0;
     });
 
 
@@ -401,25 +397,25 @@ function renderDiagram(diagram){
 
     $( ".simulate" ).click(function() {
 
-        if(gcount==0){
+        if(gcount===0){
           alert("Hint : ground is misssing");
         }
-        if(icount==0){
+        if(icount===0){
           alert("Hint : input is misssing");
         }
-        if(ocount==0){
+        if(ocount===0){
           alert("Hint : output is misssing");
         }
-        if(ccount==0){
+        if(ccount===0){
           alert("Hint : capacitor is misssing");
         }
         if(invcount<5){
           alert("Hint : Check no. of inverters");
         }
 
-        if((gcount==1)&& (icount==1) && (ocount==1) && (ccount==1) && (invcount==5)){
+        if((gcount===1)&& (icount===1) && (ocount===1) && (ccount===1) && (invcount===5)){
         	alert("number of components is complete now")
-        	if((inp_inv==1) && (inv_inv==4) && (inv_outp==1) && (inv_cap==1) && (cap_grd==1)){
+        	if((inpinvC===1) && (invinvC===4) && (invoutpC===1) && (invcapC===1) && (capgrdC===1)){
         		alert("circuit complete");
         		//window.open("mygraph.html");
         		$("#mygraph").attr('src',"mygraph1.png");
@@ -434,3 +430,5 @@ function renderDiagram(diagram){
 
 
 }
+
+$(init);
