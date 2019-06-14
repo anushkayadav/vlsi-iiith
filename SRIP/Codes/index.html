@@ -128,34 +128,34 @@
                         <div id="basic_elements">
                             <div class="row">
                               <div class="col-6 mg-0 drag tool_1 inverter" id="inverter">
-                                <img src="images/invertersym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="inverter">
+                                <img src="images/invertersym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"   data-toggle="tooltip" data-placement="right" title="inverter">
                               </div>
                               <div class="col-6 mg-0 drag tool_2 capacitor" id="capacitor">
-                                <img src="images/capacitorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="capacitor" >
+                                <img src="images/capacitorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" data-toggle="tooltip" data-placement="right" title="capacitor" >
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-6 mg-0 drag tool_3 inputsym" id="inputsym">
-                                <img src="images/inputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="input">
+                                <img src="images/inputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" data-toggle="tooltip" data-placement="right" title="input">
                               </div>
                               <div class="col-6 mg-0 drag tool_4 outputsym" id="outputsym">
-                                <img src="images/outputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="output">
+                                <img src="images/outputsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" data-toggle="tooltip" data-placement="right" title="output">
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-6 mg-0 drag tool_5 ground" id="ground">
-                                <img src="images/groundsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" title="ground">
+                                <img src="images/groundsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" data-toggle="tooltip" data-placement="right" title="ground">
                               </div>
                               <div class="col-6 mg-0 drag tool_6 resistor" id="resistor">
-                                <img src="images/resistorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="resistor">
+                                <img src="images/resistorsym.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" data-toggle="tooltip" data-placement="right" title="resistor">
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-6 mg-0 drag tool_7 vSource" id="vSource">
-                                <img src="images/voltage.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="dc voltage">
+                                <img src="images/voltage.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" data-toggle="tooltip" data-placement="right"  title="dc voltage">
                               </div>
                               <div class="col-6 mg-0 drag tool_8 npn" id="npn">
-                                <img src="images/npn.png" class="img-thumbnail componentButton" style="width:70px;height:70px;"  title="npn">
+                                <img src="images/npn.png" class="img-thumbnail componentButton" style="width:70px;height:70px;" data-toggle="tooltip" data-placement="right" title="npn">
                               </div>
                             </div> 
                         </div>
@@ -224,7 +224,27 @@
                               4. Click on <strong>Simulate</strong> to the observe the graph.<br><br> 
                               5.Click on <strong>Reset</strong> to the clear the region.
                             
-                              <img src="images/help2.png">
+                              <img src="images/help2.png"><br>
+                              ** Make sure the badges of connections match as follows :
+                              <br>
+                              <div >
+                                <button type="button" class="btn btn-outline-info m-2 mr-4 ml-5">
+                                  inv-inv <span class="badge badge-secondary" >4</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-info m-2 mr-4">
+                                  inv-cap <span class="badge badge-secondary">1</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-info m-2 mr-4">
+                                  inp-inv <span class="badge badge-secondary" >1</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-info m-2 mr-4">
+                                  inv-out <span class="badge badge-secondary" >1</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-info m-2 mr-4">
+                                  cap-grd <span class="badge badge-secondary">1</span>
+                                </button>
+
+                            </div>
                             
                       
                           </div>
@@ -246,6 +266,40 @@
             </div>
              
         </div>
+        
+
+        <div >
+          
+
+          <button type="button" class="btn btn-outline-info m-2 mr-5 ml-5" data-toggle="tooltip" data-placement="bottom" title="no. of connections between inverters" >
+            inv-inv <span class="badge badge-secondary" id="inv-inv">0</span>
+          </button>
+
+          <button type="button" class="btn btn-outline-info m-2 mr-5" data-toggle="tooltip" data-placement="bottom" title="no. of connections between inverter and capacitor">
+            inv-cap <span class="badge badge-secondary" id="inv-cap">0</span>
+          </button>
+
+          <button type="button" class="btn btn-outline-info m-2 mr-5" data-toggle="tooltip" data-placement="bottom" title="no. of connections between input and inverter">
+            inp-inv <span class="badge badge-secondary" id="inp-inv">0</span>
+          </button>
+
+          <button type="button" class="btn btn-outline-info m-2 mr-5" data-toggle="tooltip" data-placement="bottom" title="no. of connections between inverter and output">
+            inv-out <span class="badge badge-secondary" id="inv-out">0</span>
+          </button>
+
+          <button type="button" class="btn btn-outline-info m-2 mr-5" data-toggle="tooltip" data-placement="bottom" title="no. of connections between capacitor and ground">
+            cap-grd <span class="badge badge-secondary" id="cap-grd">0</span>
+          </button>
+
+         
+          <div class="container-fluid badge badge-warning m-1" >
+          Remember! : Start connecting the components only after you have dragged <strong>all of them</strong> into the white region
+        </div>
+      </div>
+
+        <!--<div class="container-fluid badge badge-warning m-1" >
+          Remember! : Start connecting the components only after you have dragged <strong>all of them</strong> into the white region
+        </div>-->
 
 
     
@@ -253,10 +307,19 @@
          
 
         
-        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript" src="../libraries/bootstrap/js/bootstrap.js"></script>
-        <script type="text/javascript" src="../libraries/bootstrap/js/bootstrap.bundle.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
+    
+        <script src="../libraries/bootstrap/js/popper.min.js"></script>
+    
+
+    <script type="text/javascript" src="../libraries/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../libraries/bootstrap/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script>
+      $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+      });
+</script>    
     </body>
 </html>
