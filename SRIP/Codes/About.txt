@@ -17,11 +17,15 @@ Follow these instruction to run the the experiment on simulator.
 
 6. Make sure all the componets are connected as per requirements of experiment.
 
-7. Click on "SIMULATE" to the observe the graph.
+7. Observe the number of each connection in the connection badges at the bottom.
 
-8.Click on "RESET" to the clear the region.
+8. Make sure no. of badges match with the ones given in HELP box.
 
-9. Click on "HELP" button to check the instructions from simulator itself.
+9. Click on "SIMULATE" to the observe the graph.
+
+10. Click on "RESET" to the clear the region.
+
+11. Click on "HELP" button to check the instructions from simulator itself.
 
 --------------------------------------------------------------------------------------------------------------------------
 
