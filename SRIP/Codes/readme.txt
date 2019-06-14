@@ -12,6 +12,7 @@ images
 
 Libraries used:
 Bootstrap for better layout
+popper.js for tooltips
 
 ----------------------------------------------------------------------------------
 
