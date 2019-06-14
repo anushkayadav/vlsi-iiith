@@ -327,6 +327,12 @@ canvas.droppable({
 		 invoutpC=0;
 		 invcapC=0;
 		 capgrdC=0;
+		 document.getElementById("inv-inv").innerHTML = invinvC ;
+		 document.getElementById("inp-inv").innerHTML = inpinvC ;
+		 document.getElementById("inv-out").innerHTML = invoutpC ;
+		 document.getElementById("inv-cap").innerHTML = invcapC ;
+		 document.getElementById("cap-grd").innerHTML = capgrdC ;
+		 $("#mygraph").attr('src',"images/graph1.png");
     });
 
 
