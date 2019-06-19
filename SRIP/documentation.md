@@ -102,10 +102,14 @@ To study the effect of gate sizing in chain of inverters on its output delay.
 ##### Overview:
 html page of the module.
 
-Layout is divided into 4 parts. 
+Layout is divided into 4 parts.
+
 Part 1 : Tools with Simulate , Help and Reset buttons.
+
 Part 2 : Drop Zone , this is where the components will dropped and connected.
+
 Part 3 : Graph Area, this is where the graph will displayed after validatinf the circuit on clicking "Simulate" button.
+
 Part 4 : Count Badges , these are the counts of various connections in the circuit.
 
 ##### Technicalities
