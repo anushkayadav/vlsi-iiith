@@ -77,7 +77,7 @@ To study the effect of gate sizing in chain of inverters on its output delay.
 
 ## Procedure:
 
-1. With The help of About.txt Page , try to build the Circuit.
+1. With The help of [About](https://github.com/anushkayadav/vlsi-iiith/blob/master/SRIP/Codes/About.txt) Page , try to build the Circuit.
 2. Simulate and analyse the graph.
 
 
@@ -118,17 +118,17 @@ This file manages all the local variables and functions that will be called on p
 
 ##### Technicalities:
 
-Input() : Function to add Input terminal (grey) to all the dropped components.
+1. input() : Function to add Input terminal (grey) to all the dropped components.
 
-Output() : Function to add Output terminal (green) to all the dropped components.
+2. output() : Function to add Output terminal (green) to all the dropped components.
 
-interact(): Fucntion to make connections between various components.
+3. interact(): Fucntion to make connections between various components.
 
-renderDiagram(): Function which drops the Components from tool box to Drop Zone.
+4. renderDiagram(): Function which drops the Components from tool box to Drop Zone.
 
- $( ".button" ).click(function() : Function to Reset the simulator to initial conditions.
+5. $( ".button" ).click(function() : Function to Reset the simulator to initial conditions.
 
- $( ".simulate" ).click(function() : Fucntion to validate the circuit and display graph.
+6. $( ".simulate" ).click(function() : Function to validate the circuit and display graph.
 
 
 
