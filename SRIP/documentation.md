@@ -93,5 +93,45 @@ To study the effect of gate sizing in chain of inverters on its output delay.
 2. [jQuery](https://jquery.com/)
 3.  [Popper.js](https://popper.js.org/)
 
+## Implementation:
+
+### Files
+
+#### index.html
+
+##### Overview:
+html page of the module.
+
+Layout is divided into 4 parts. 
+Part 1 : Tools with Simulate , Help and Reset buttons.
+Part 2 : Drop Zone , this is where the components will dropped and connected.
+Part 3 : Graph Area, this is where the graph will displayed after validatinf the circuit on clicking "Simulate" button.
+Part 4 : Count Badges , these are the counts of various connections in the circuit.
+
+##### Technicalities
+Used html and bootstrap to design the layout of the simulator.
+
+#### main.js
+
+##### Overview:
+This file manages all the local variables and functions that will be called on pressing various buttons in the simulator.
+
+##### Technicalities:
+
+Input() : Function to add Input terminal (grey) to all the dropped components.
+
+Output() : Function to add Output terminal (green) to all the dropped components.
+
+interact(): Fucntion to make connections between various components.
+
+renderDiagram(): Function which drops the Components from tool box to Drop Zone.
+
+ $( ".button" ).click(function() : Function to Reset the simulator to initial conditions.
+
+ $( ".simulate" ).click(function() : Fucntion to validate the circuit and display graph.
+
+
+
+
 
 
