@@ -24,4 +24,6 @@ Bootstrap for better layout
 popper.js for tooltips
 
 ----------------------------------------------------------------------------------
-
+### Quiz
+ 
+ run quiz.html for quiz
