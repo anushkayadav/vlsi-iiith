@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz</title>
+    <link type='text/css' rel='stylesheet' href='quiz.css'/>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open Sans"/>
+    <style>
+    	body  {
+    		background-image: url("bgimg.jpg");
+    		background-color: #000000;
+    	}
+    	#mainbox{
+    		position: absolute;
+    		left: 20%;
+    		
+    		margin: 100px;
+    		
+    		width: 700px;
+    		height: 500px;
+    		background: rgba(0,0,0,0.6);
+    		
+    	}
+    	h1{
+    		color:white;
+    		font-size: 100px; 
+    		text-align: center;
+    	}
+    	h2{
+    		color:hsl(0, 0%, 71%);
+    		text-align: center;
+    	}
+    	.startbtn{
+    		background-color: rgb(158, 255, 255);
+    		border: none;
+  			color: black;
+  			padding: 15px 32px;
+  			text-align: center;
+  			text-decoration: none;
+  			display: inline-block;
+  			font-size: 16px;
+  			margin: 4px 2px;
+  			cursor: pointer;
+  			align-content: center;
+  			position: relative;
+  			right:40%;
+  			border-radius: 12px;
+    	}
+    	.startbtn:hover{
+            background: rgb(31, 221, 255);
+          }
+</style>
+</head>
+<body>
+	<div id="mainbox" >
+		<h1>QUIZ</h1><br>
+		<h2>DELAY ESTIMATION IN CHAIN OF INVERTERS</h2>
+		<button class="startbtn">Start</button>
+
+	 </div>
+
+
+
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src='questions.json'></script>
+    <script type='text/javascript' src='quiz.js'></script>
+
+</body>
+</html>

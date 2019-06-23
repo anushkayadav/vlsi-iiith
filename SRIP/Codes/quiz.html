@@ -4,25 +4,82 @@
         <title>Quiz</title>
         <link type='text/css' rel='stylesheet' href='quiz.css'/>
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open Sans"/>
+        <style>
+            .collapsible {
+                background-color: #777;
+                color: white;
+                cursor: pointer;
+                padding: 18px;
+                width: 100%;
+                border: none;
+                text-align:left;
+                outline: none;
+                font-size: 15px;
+                left:25px;
+              }
+
+            .active, .collapsible:hover {
+                background-color: #555;
+              }
+
+            .content {
+                padding: 0 18px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
+                background-color: #f1f1f1;
+                text-align: left;
+              }
+        </style>
+
     </head>
     <body>
         <div id='container'>
             <div id='title'>
-                <h1>Learning Js Properly: Project #1 - Dynamic Quiz</h1>
+                <h1>Delay Estimation in chain of Inverters</h1>
             </div>
             <br/>
             <div id='quiz'></div>
             <div class='button' id='next'><a href='#'>Next</a></div>
             <div class='button' id='prev'><a href='#'>Prev</a></div>
             <div class='button' id='start'> <a href='#'>Start Over</a></div>
-            <!-- <button class='' id='next'>Next</a></button>
-            <button class='' id='prev'>Prev</a></button>
-            <button class='' id='start'> Start Over</a></button> -->
+            <div class='button' id='ans'> <a href='#'>View Answers</a></div>
+           
         </div>
+
+        
 
          <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src='questions.json'></script>
         <script type='text/javascript' src='quiz.js'></script>
-    </body>
+
+      
+<button class="collapsible">view figure</button>
+<div class="content">
+  <img src="fig1.png">
+</div>
+
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+
+</script>
+</body>
+
+
 </html>

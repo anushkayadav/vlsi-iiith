@@ -280,7 +280,9 @@ function renderDiagram(diagram){
 
 canvas.droppable({
 	drop: function(event, ui){
-		var node={_id: id,position: ui.helper.position()};
+		var node={_id: id,
+			position: ui.helper.position()
+		};
 
 		node.position.left-=$("#tools").width();
 		id=id+1;

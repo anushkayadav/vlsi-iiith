@@ -1,14 +1,101 @@
-function init () {
+function init() {
+
+  $( ".startbtn" ).click(function(){
+    $("#mainbox").empty();
+    var qui = document.createElement("div");
+    qui.setAttribute("id", "quiz");
+    var element = document.getElementById("mainbox");
+    element.appendChild(qui);
+
+    var next = document.createElement("div");
+    next.setAttribute("id", "next");
+    next.setAttribute("class", "button");
+
+    var element = document.getElementById("mainbox");
+    element.appendChild(next);
+
+  });
+
+ $( "#ans" ).click(function(){
+  window.open("answers.html");
+
+
+
+
+ }
+)
+
+
+
+
+
+
+
   var questions = [{
     question: "Can we reduce delay to zero?",
     choices: ["Yes","No","Yes in most of the cases","Yes in very few cases"],
     correctAnswer: 1
-  },];
+  }, {
+    question: "What you mean by delay?",
+    choices: ["time to correctly access the input","time to correctly access the output","average rise time and fall time","time taken for the output to come after the input has been captured"],
+    correctAnswer: 3
+  }, {
+    question: "What does Cg1 corresponds to in the following formula?",
+    choices: ["input gate capacitance of the last inverter driving capacitative load","sum of input capacitances of all the inverter in series","input gate capacitance of first inverter in series","None of the above"],
+    correctAnswer: 2
+  }, {
+    question: "If the gate size is increased by n then what will be the effect on its resistance?",
+    choices: ["increases by n","decreases by n","decreases by n2","remains constant"],
+    correctAnswer: 1
+  }, {
+    question: "If the gate size is increased by n then what will be the effect on its capacitance?",
+    choices: ["increases by n","decreases by n","decreases by n2","remains constant"],
+    correctAnswer: 0
+  },{
+    question: "Choose the correct statement from the following.",
+    choices: ["All the inveters in series are kept to be of same size for minimum delay","The inverter size does not matter as long as the inverter driving the load has very big size","The inverter size does not matter as long as the inverter driving the load has very small size","The size of the inverter driving the load is maximum of all and is some multiple of size of the previous inverters"],
+    correctAnswer: 3
+  }, {
+    question: "For minimm delay, what is the no of inverters in the chain connected in series?",
+    choices: [4,5,6,"need to calculate according to the situation given, it is not fixed."],
+    correctAnswer: 3
+  }, {
+    question: "Let a be the stage ratio of an inverter chain. What is its optimum value to drive a load capacitor with minimum delay?",
+    choices: [4,"1/e",2,"e"],
+    correctAnswer: 3
+  }, {
+    question: " Let a be the stage ratio of an inverter chain., if parasitic capacitances are taken into consideration then what is the optimum value of a? ",
+    choices: [4,"1/e",2,"e"],
+    correctAnswer: 0
+  },{
+    question: "Rise time and fall time is _____ to load capacitance CL",
+    choices: ["directly proportional","inversely proportonal","exponentially equal","not related"],
+    correctAnswer: 0
+  },{
+    question: "Which quantity is slower?",
+    choices: ["rise time","fall time","all of the mentioned","none of the mentioned"],
+    correctAnswer: 0
+  }, {
+    question: "The inverter pair delay for inverters having 4:1 ratio is",
+    choices: [ "4Ʈ","Ʈ","5Ʈ ","2Ʈ"],
+    correctAnswer: 2
+  },{
+    question: " Effective fanout(f) in the figure 1 is ",
+    choices: [2,4 ,8, 1],
+    correctAnswer: 2
+  },{
+    question: " Effective fanout(f) at each stage in the figure 1 is ",
+    choices: [2,4 ,8, 1],
+    correctAnswer: 0
+  },{
+    question: "The optimum size of each inverter is ________ of its neighbours",
+    choices: ["geometric mean","arithmetic mean","geometric or arithmetic mean","none of the above"],
+    correctAnswer: 0
+  }];
   
   var questionCounter = 0; //Tracks question number
   var selections = []; //Array containing user choices
   var quiz = $('#quiz'); //Quiz div object
- alert(questions[1].question);
   
   // Display initial question
   displayNext();
@@ -55,6 +142,8 @@ function init () {
     selections = [];
     displayNext();
     $('#start').hide();
+    $('#ans').hide();
+
   });
   
   // Animates buttons on hover
@@ -123,6 +212,7 @@ function init () {
           
           $('#prev').hide();
           $('#next').show();
+          $('#ans').hide();
         }
       }else {
         var scoreElem = displayScore();
@@ -130,6 +220,8 @@ function init () {
         $('#next').hide();
         $('#prev').hide();
         $('#start').show();
+        $('#ans').show();
+
       }
     });
   }
@@ -150,5 +242,4 @@ function init () {
     return score;
   }
 }
-
 $(init);
